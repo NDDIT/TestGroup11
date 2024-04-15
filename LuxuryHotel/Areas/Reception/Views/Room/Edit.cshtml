@@ -1,0 +1,100 @@
+﻿@model LuxuryHotel.Models.ROOM
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>CHỈNH SỬA PHÒNG</h2>
+
+@using (Html.BeginForm("Edit", "Room", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @* Trường ẩn để giữ RoomID *@
+        @Html.HiddenFor(model => model.RoomID)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên Phòng:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.RoomName, new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Loại Phòng:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.RoomTypeID, (SelectList)ViewBag.RoomTypes, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Khu Vực:</label>
+            <div class="col-md-10">
+                @* Assuming Areas is a SelectList with AreaID and AreaName *@
+                <select id="provinceSelect" name="sArea" class="form-control" required>
+                    <option value="@Model.Area">@Model.Area</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Trạng Thái:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.RoomStatus, (SelectList)ViewBag.Statuses, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tiện ích:</label>
+            <div class="col-md-10">
+                @foreach (var utility in ViewBag.Utilities)
+                {
+                    var isChecked = ViewBag.RoomUtilities.Contains(utility.UtilitiesID);
+                    <label>
+                        <input type="checkbox" name="utilities" value="@utility.UtilitiesID" @(isChecked ? "checked" : "") /> @utility.UtilitiesName
+                    </label>
+                }
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cập nhật" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("<<< VỀ TRANG QUẢN LÝ PHÒNG", "Index")
+</div>
+
+<script>
+    // Dữ liệu tỉnh thành
+    var provinces = [
+        "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ", "An Giang", "Bà Rịa - Vũng Tàu",
+        "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước",
+        "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp",
+        "Gia Lai", "Hà Giang", "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa",
+        "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định", "Nghệ An",
+        "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị",
+        "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang",
+        "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
+    ];
+
+    // Động dụng dữ liệu vào thẻ select
+    var select = document.getElementById("provinceSelect");
+    for (var i = 0; i < provinces.length; i++) {
+        if ("@Model.Area" !== provinces[i]) {
+            var option = document.createElement("option");
+            option.value = provinces[i];
+            option.text = provinces[i];
+            select.appendChild(option);
+        }
+    }
+</script>
+

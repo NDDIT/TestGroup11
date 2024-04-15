@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+        .img-col {
+            max-width: 100px;
+        }
+
+        .mgt {
+            margin-top: 16px;
+        }
+
+        .table-and-form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #editFormContainer {
+            width: 30%;
+            display: none;
+        }
+
+        .row {
+            width: calc(100% - 30%);
+            text-align: right;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        var dataTable = $('#tblCustomerList').DataTable({
+            "searching": true,
+            "ordering": true
+        });
+        function showEditForm(customer) {
+            $('#editFormContainer').show();
+            $('#editCustomerID').val(customer.CustomerID);
+            $('#editUser').val(customer.User);
+            $('#editPassword').val(customer.Password);
+            $('#editFullName').val(customer.FullName);
+            $('#editEmail').val(customer.Email);
+            $('#editPhoneNumber').val(customer.PhoneNumber);
+            $('#btn-delete').show();
+        }
+
+        function showCreateForm() {
+
+
+            // Hiển thị form tạo mới và làm sạch giá trị
+            $('#editFormContainer').show();
+            $('#editCustomerID').val('0');
+            $('#editUser').val('');
+            $('#editPassword').val('');
+            $('#editFullName').val('');
+            $('#editEmail').val('');
+            $('#editPhoneNumber').val('');
+            $('#btn-delete').hide();
+        }
+        function isValidPhoneNumber(phoneNumber) {
+            // Biểu thức chính quy kiểm tra xem chuỗi có chứa 10 chữ số không
+            var phoneRegex = /^\d{10}$/;
+
+            if (phoneRegex.test(phoneNumber)) {
+                // Chuỗi là số điện thoại hợp lệ
+                return true;
+            } else {
+                // Chuỗi không phải là số điện thoại hợp lệ
+                return false;
+            }
+        }
+        function loadCustomerList(dataTable) {
+    $.ajax({
+        url: '/Reception/Customer/GetCustomerList',
+        type: 'get',
+        success: function (data) {
+            if (data.code == 200) {
+                console.log(data);
+                    dataTable.clear();
+
+                $.each(data.customer, function (k, v) {
+                        let s = '<tr id="' + v.CustomerID + '">';
+                        s += '<td style="text-align: left;">' + v.User + '</td>';
+                        s += '<td>' + v.Password + '</td>';
+                        s += '<td>' + v.FullName + '</td>';
+                        s += '<td>' + v.Email + '</td>';
+                        s += '<td>' + v.PhoneNumber + '</td>';
+                        s += '<td class="col-ms-3 text-right">';
+                        s += '<button class="btn btn-sm btn-warning" name="update" onclick="editCustomerList(' + v.CustomerID + ')"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp';
+                        s += '</td>';
+                        s += '</tr>';
+                        dataTable.row.add($(s));
+                    });
+
+                    // Tạo lại DataTable
+                    dataTable.draw();
+
+            }
+        }
+    });
+    }
+        $(document).ready(function () {
+
+            loadCustomerList(dataTable);
+        });
+
+
+
+
+
+        function deleteCustomer() {
+            var customerID = $('#editCustomerID').val();
+
+            if (confirm('Bạn có chắc muốn xóa người dùng này không?')) {
+                $.ajax({
+                    url: '/Reception/Customer/CheckAndDeleteCustomer',
+                    type: 'post',
+                    data: {
+                        customerID: customerID
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            $('#editFormContainer').hide();
+                            loadCustomerList(dataTable);
+                        } else {
+                            alert(data.msg);
+                        }
+                    },
+                    error: function () {
+                        alert('Đã xảy ra lỗi khi gửi dữ liệu lên server.');
+                    }
+                });
+            }
+        }
+
+        function editCustomerList(id) {
+            console.log(id);
+            $.ajax({
+                url: '/Reception/Customer/GetCustomerTypeDetails',
+                type: 'get',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        showEditForm(data.customerList);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+
+        function closeEditForm() {
+            $('#editFormContainer').hide();
+        }
+
+        function submitEditForm() {
+            function validateFormData() {
+                var editedPassword = $('#editPassword').val();
+                var editedPhoneNumber = $('#editPriceOverTime').val();
+
+                if (editedPassword.lenght <= 5) {
+                    alert('Password quá ngắn.');
+                    return false;
+                }
+
+                if (isValidPhoneNumber(editedPhoneNumber)) {
+                    alert('Số điện thoại không hợp lệ.');
+                    return false;
+                }
+
+                return true;
+            }
+
+            if (!validateFormData()) {
+                return;
+            }
+
+            var editCustomerID = $('#editCustomerID').val();
+            var editedUser = $('#editUser').val();
+            var editedPassword = $('#editPassword').val();
+            var editedFullName = $('#editFullName').val();
+            var editedEmail = $('#editEmail').val();
+            var editedPhoneNumber = $('#editPhoneNumber').val();
+            console.log("ID=" + editCustomerID + "User=" + editedUser);
+            var actionUrl = '/Reception/Customer/Edit';
+
+            // Nếu RoomTypeID không tồn tại, đổi hành động sang tạo mới
+            if (editCustomerID === '0') {
+                actionUrl = '/Reception/Customer/CreateCustomer';
+            }
+
+            $.ajax({
+                url: actionUrl,
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    CustomerID: editCustomerID,
+                    User: editedUser,
+                    Password: editedPassword,
+                    FullName: editedFullName,
+                    Email: editedEmail,
+                    PhoneNumber: editedPhoneNumber,
+                }),
+                success: function (data) {
+                    console.log(data);
+                    if (data.code === 200) {
+                        $('#editFormContainer').hide();
+                        loadCustomerList(dataTable);
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    console.log('Error:', arguments);
+                    alert('Đã xảy ra lỗi khi gửi dữ liệu lên server.');
+                }
+            });
+
+        }
+    </script>
+}
+<button type="button" class="btn btn-success" onclick="showCreateForm()" style="width:80px">Create</button>
+
+<div class="table-and-form-container">
+    <div class="table-responsive mgt" style="width:80%">
+        <table id="tblCustomerList" class="table table-striped" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tên người dùng</th>
+                    <th>Mật khẩu</th>
+                    <th>Tên đầy đủ</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th class="col-ms-3 text-right">Các chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="editFormContainer">
+        <form id="editForm">
+            <div class="form-group">
+                <input type="hidden" id="editCustomerID" name="CustomerID" />
+            </div>
+            <div class="form-group">
+                <label for="editUser">Tên người dùng:</label>
+                <input type="text" class="form-control" id="editUser">
+            </div>
+            <div class="form-group">
+                <label for="editPassword">Mật khẩu:</label>
+                <input type="text" class="form-control" id="editPassword">
+            </div>
+            <div class="form-group">
+                <label for="editFullName">Tên đầy đủ:</label>
+                <input type="text" class="form-control" id="editFullName">
+            </div>
+            <div class="form-group">
+                <label for="editEmail">Email:</label>
+                <input type="text" class="form-control" id="editEmail">
+            </div>
+            <div class="form-group">
+                <label for="editPhoneNumber">Số điện thoại:</label>
+                <input type="text" class="form-control" id="editPhoneNumber">
+            </div>
+
+            <!-- Các nút để submit hoặc đóng form -->
+            <button type="button" class="btn btn-primary" onclick="submitEditForm()">Submit</button>
+            <button type="button" class="btn btn btn-danger" id="btn-delete" onclick="deleteCustomer()">Delete</button>
+            <button type="button" class="btn btn-secondary" onclick="closeEditForm()">Close</button>
+        </form>
+    </div>
+</div>
+
+

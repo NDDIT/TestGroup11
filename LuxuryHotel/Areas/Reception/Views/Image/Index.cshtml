@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Quản lý Ảnh";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+        .img-col {
+            max-width: 100px;
+        }
+
+        .mgt {
+            margin-top: 16px;
+
+        }
+     
+
+        .row {
+            width: calc(100% - 500px);
+            
+        }
+       
+    </style>
+}
+
+@section Scripts {
+    <script>
+        var dataTable = $('#tblRoomImg').DataTable({
+            "searching": true,
+            "ordering": true
+        });
+
+        function loadRoomImages(dataTable) {
+            $.ajax({
+                url: '/Reception/Image/GetRoomImages',
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 200) {
+                        console.log(data);
+
+                        // Kiểm tra xem dataTable đã được khởi tạo chưa
+                        if (dataTable) {
+
+                            // Xóa dòng cũ
+                            dataTable.clear();
+
+                            // Thêm dữ liệu mới
+                            $.each(data.rooms, function (k, v) {
+                                let s = '<tr id="' + v.RoomID + '">';
+                                s += '<td style=" width: 15%;">' + v.RoomName + '</td>';
+                                s += '<td style=" width: 550%;">' + getImages(getUrlImages(v.RoomID)) + '</td>';
+                                s += '<td style="text-align: right; width: 15%;">' + getCount(getUrlImages(v.RoomID)) + '</td>';
+                                s += '<td class="col-ms-3 text-right" style=" width: 15%;">';
+                                s += '<button class="btn btn-sm btn-warning" name="update" onclick="editRoomImages(' + v.RoomID + ')"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp';
+                                s += '</td>';
+                                s += '</tr>';
+                                dataTable.row.add($(s));
+                            });
+
+                            // Tạo lại DataTable
+                            dataTable.draw();
+                        }
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadRoomImages(dataTable);
+        });
+
+
+
+        // Hàm này gọi phương thức API để lấy thông tin UrlImages từ Room
+        function getUrlImages(roomID) {
+            var UrlImages;
+            $.ajax({
+                url: '/Reception/Image/GetUrlImagesByRoom',
+                type: 'GET',
+                async: false, // Sử dụng synchronous để đảm bảo giá trị được trả về trước khi tiếp tục
+                data: { roomID: roomID },
+                success: function (data) {
+                    console.log(data);
+                    UrlImages = data.images;
+                },
+                error: function (error) {
+                    console.log("Lỗi khi lấy thông tin UrlImages: " + error);
+                }
+            });
+            return UrlImages;
+        }
+
+        // Hàm này trả về chuỗi HTML chứa các biểu tượng tiện ích
+        function getImages(UrlImages) {
+            var iconsHtml = '';
+            $.each(UrlImages, function (i, images) {
+                iconsHtml += '<img src="/Admin/Images/Room/' + images.ImagePath + '" loading="lazy" style="width:20px; height:20px; margin:5px" />';
+            });
+            return iconsHtml;
+        }
+
+        function getCount(UrlImages) {
+            var count = 0;
+            $.each(UrlImages, function (i, images) {
+                count++;
+            });
+            return count;
+        }
+        function editRoomImages(roomID)
+        {
+            window.location.href = '@Url.Action("Edit", "Image")?roomID=' + roomID;
+        }
+    </script>
+}
+
+<div class="table-responsive mgt" >
+    <table id="tblRoomImg" class="table table-striped"  cellspacing="0">
+        <thead>
+            <tr>
+                <th>Tên Phòng</th>
+                <th>Ảnh</th>
+                <th>Số lượng Ảnh</th>
+                <th class="col-ms-3 text-right">Các chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+        </tbody>
+    </table>
+</div>

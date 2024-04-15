@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+     
+        .mgt {
+            margin-top: 16px;
+        }
+
+        .row {
+            width: calc(100% - 40%);
+            
+        }
+        .main-panel {
+            margin: 0 auto;
+            width: calc(100% - 40%);
+        }
+        #modalTitle{
+            font-weight: 700;
+            text-align: center;
+        }
+        .modal-content {
+            padding: 10px
+        }
+    </style>
+}
+<div id="tb-fm-service">
+    <button type="button" class="btn btn-success" id="btnCreate">Tạo mới dịch vụ</button>
+    <div class="table-responsive mgt">
+        <table id="tblService" class="table table-striped" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tên dịch vụ </th>
+                    <th>Giá (1 lần | 1 ký | 1 món)</th>
+                    <th class="col-ms-3 text-right">Các chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="modalService" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" id="modalTitle"></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <input type="text" id="Serviceid" value="" hidden />
+                            <label>tên dịch vụ</label>
+                            <input type="text" class="form-control" id="txtServiceName" placeholder="tên dịch vụ" />
+                            <label>Giá</label>
+                            <input type="number" min="1" class="form-control" id="txtServicePrice" placeholder="Giá " />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-right" id="btnClose">Đóng</button>
+                    <button type="button" class="btn btn-primary pull-right" id="btnSubmit">Lưu</button>
+                    <button type="button" class="btn btn-danger pull-right" id="btnDeleted">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var dataTable = $('#tblService').DataTable({
+            "searching": true,
+            "ordering": true
+        });
+       
+        function loadService(dataTable) {
+            $.ajax({
+                url: '/Reception/Service/GetService',
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 200) {
+                        console.log(data);
+
+                        // Kiểm tra xem dataTable đã được khởi tạo chưa
+                        if (dataTable) {
+
+                            // Xóa dòng cũ
+                            dataTable.clear();
+
+                            // Thêm dữ liệu mới
+                            $.each(data.services, function (k, v) {
+                                let s = '<tr id="' + v.ServiceID + '">';
+                                s += '<td>' + v.ServiceName + '</td>';
+                                s += '<td style="text-align: right;">' + v.ServicePrice + '</td>';
+                                s += '<td class="col-ms-3 text-right">';
+                                s += '<button class="btn btn-sm btn-warning" name="update"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp;';
+                                s += '</td>';
+                                s += '</tr>';
+                                dataTable.row.add($(s));
+                            });
+
+                            // Tạo lại DataTable
+                            dataTable.draw();
+                        }
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            loadService(dataTable);
+        });
+
+        $(document).on('click', 'button[name="update"]', function () {
+            let Serviceid = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Reception/Service/Details',
+                type: 'get',
+                data: {
+                    ServiceID:Serviceid
+                },
+                success: function (data) {
+                    console.log(data);
+                    
+                    if (data.code == 200) {
+                        $('#txtServiceName').val(data.sv.ServiceName);
+                        $('#txtServicePrice').val(data.sv.ServicePrice);
+                        $('#btnDeleted').show();
+                        $('#modalTitle').text('Cập nhật Dich vu');
+                        $('#Serviceid').val(Serviceid);
+                        $('#modalService').modal();
+                        $('#modalService').modal('show');
+
+                        console.log($('#modalService').hasClass('show'));
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+        $(document).on('click', '#btnDeleted', function () {
+            let Serviceid = $('#Serviceid').val();
+            
+            // Gửi yêu cầu AJAX để xóa dịch vụ
+            $.ajax({
+                url: '/Reception/Service/DeleteService',
+                type: 'post',
+                data: { ServiceID: Serviceid },
+                success: function (data) {
+                    if (data.code == 200) {
+                        // Cập nhật bảng dữ liệu
+                        loadService(dataTable);
+                        // Đóng modalS
+                        $('#modalService').modal('hide');
+                    } else {
+                        alert(data.msg);
+                        console.log(data)
+                    }
+                }
+            });
+        });
+       
+
+        $('#btnCreate').on('click', function () {
+            // Đặt tiêu đề modal và ẩn ID dịch vụ
+            $('#modalTitle').text('Tạo mới Dịch vụ');
+            $('#Serviceid').val('0');
+
+            // Đặt giá trị mặc định cho tên và giá dịch vụ
+            $('#txtServiceName').val('');
+            $('#txtServicePrice').val('1');
+            $('#btnDeleted').hide();
+            // Hiển thị modal
+            $('#modalService').modal('show');
+
+        });
+
+        // Xử lý sự kiện click cho nút Lưu trong modal
+        $('#btnSubmit').on('click', function () {
+            // Lấy giá trị từ các trường input
+            var ServiceID = $('#Serviceid').val();
+            var ServiceName = $('#txtServiceName').val();
+            var ServicePrice = $('#txtServicePrice').val();
+
+            // Gửi AJAX request đến action SaveService
+            $.ajax({
+                url: '/Reception/Service/SaveService',
+                type: 'post',
+                data: {
+                    ServiceID: ServiceID,
+                    ServiceName: ServiceName,
+                    ServicePrice: ServicePrice
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        // Nếu thành công, đóng modal và làm mới danh sách dịch vụ
+                        $('#modalService').modal('hide');
+                        loadService(dataTable);
+                    } else {
+                        // Nếu có lỗi, hiển thị thông báo lỗi
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+        $('#btnClose').on('click', function () {
+            // Đặt lại giá trị các trường input khi đóng modal
+            $('#Serviceid').val('');
+            $('#txtServiceName').val('');
+            $('#txtServicePrice').val('');
+            $('#btnDeleted').hide();
+
+            // Đóng modal
+            $('#modalService').modal('hide');
+        });
+</script>
+}

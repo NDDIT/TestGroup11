@@ -1,0 +1,220 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+        .img-col {
+            max-width: 100px;
+        }
+
+        .mgt {
+            margin-top: 16px;
+        }
+
+        .table-and-form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #editFormContainer {
+            width: 30%;
+            display: none;
+        }
+        .mgt {
+            margin-top: 16px;
+            padding:20px;
+        }
+    </style>
+}
+<p>
+    <button class="btn btn-light" id="btnCreate" style="color:forestgreen">
+        <i class="fa fa-plus" aria-hidden="true"></i> Thêm phòng
+    </button>
+</p>
+
+<select id="areaSelect" style="width: 40%">
+    <option value="">Chọn khu vực</option>
+</select>
+
+<p>Danh sách phòng theo khu vực</p>
+
+<div id="roomList">
+    <!-- Dữ liệu phòng sẽ được hiển thị ở đây -->
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/datatables")
+<script>
+
+        $(document).ready(function () {
+            // Khi trang được tải
+            loadAreaOptions(); // Gọi phương thức để tải danh sách khu vực vào thẻ select
+
+            // Lắng nghe sự kiện change trên thẻ select
+            $('#areaSelect').change(function () {
+                var selectedArea = $(this).val(); // Lấy giá trị được chọn trong thẻ select
+                getRoomsByArea(selectedArea); // Gọi phương thức để lấy danh sách phòng theo khu vực
+            });
+        });
+
+        $('#btnCreate').click(function () {
+            window.location.href = '@Url.Action("Create", "Room")';
+        });
+         function editRoomPrice(roomID) {
+        // Chuyển hướng đến action Edit (POST) và truyền tham số RoomID
+        window.location.href = '@Url.Action("Edit", "Room")?id=' + roomID;
+          }
+
+        function loadAreaOptions() {
+            $.ajax({
+                url: '/Reception/Room/GetAreaList',
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code === 200) {
+                        // Xóa tất cả các option trước khi thêm mới
+                        $('#areaSelect').empty();
+                        $('#areaSelect').append($('<option>', {
+                            value: "",
+                            text: "Chọn khu vực"
+                        }));
+                        // Thêm các phần tử option vào thẻ select dựa trên danh sách khu vực
+                        $.each(data.areas, function (i, item) {
+                            $('#areaSelect').append($('<option>', {
+                                value: item,
+                                text: item
+                            }));
+                        });
+                    } else {
+                        console.log("Lỗi khi lấy danh sách khu vực: " + data.msg);
+                    }
+                },
+                error: function (error) {
+                    console.log("Lỗi khi lấy danh sách khu vực: " + error);
+                }
+            });
+        }
+
+        // Hàm này gọi phương thức API để lấy thông tin Utilities từ Room
+        function getUtilities(roomID) {
+            var utilities;
+            $.ajax({
+                url: '/Reception/Room/GetUtilitiesByRoom',
+                type: 'GET',
+                async: false, // Sử dụng synchronous để đảm bảo giá trị được trả về trước khi tiếp tục
+                data: { roomID: roomID },
+                success: function (data) {
+                    utilities = data.utilities;
+                },
+                error: function (error) {
+                    console.log("Lỗi khi lấy thông tin Utilities: " + error);
+                }
+            });
+            return utilities;
+        }
+
+        // Hàm này trả về chuỗi HTML chứa các biểu tượng tiện ích
+        function getUtilitiesIcons(utilities) {
+            var iconsHtml = '';
+            $.each(utilities, function (i, utility) {
+                iconsHtml += '<img src="/Admin/Images/Room/' + utility.UtilitiesPicture + '" loading="lazy" style="width:20px; height:20px; margin:5px" /> ';
+            });
+            return iconsHtml;
+        }
+
+
+        function getRoomsByArea(area) {
+            // Gọi phương thức API để lấy danh sách phòng dựa trên khu vực (area)
+            $.ajax({
+                url: '/Reception/Room/GetRoomsByArea',
+                type: 'GET',
+                data: { area: area },
+                success: function (data) {
+                    console.log(area);
+
+                    // Kiểm tra mã code trước khi xử lý dữ liệu1
+                    if (data.code === 200) {
+                        console.log("Lấy danh sách phòng thành công");
+
+                        // Xử lý dữ liệu nhận được từ phương thức API
+                        // data là danh sách các phòng
+                        // Thực hiện các hành động cần thiết để hiển thị dữ liệu trong view
+                        console.log(data);
+
+                        var roomTable = $('<table>').addClass('table table-striped').css('text-align', 'center').attr('id', 'table-room-lst');; // Thêm class 'table' từ Bootstrap và thiết lập text-align
+                        var tableHeader = $('<thead>').append('<tr><th style="display: none;">Room ID</th><th>Room Name</th><th>Area</th><th>Type ID</th><th>Status</th><th>Utilities</th><th>Setting</th></tr>');
+                        var tableBody = $('<tbody>');
+
+                        for (var i = 0; i < data.rooms.length; i++) {
+                            console.log(data.rooms[i]); // Kiểm tra dữ liệu từng phần tử
+                            var roomRow = $('<tr>').append(
+                                $('<td style="display: none;">').text(data.rooms[i].RoomID),
+                                $('<td>').text(data.rooms[i].RoomName),
+                                $('<td>').text(data.rooms[i].Area),
+                                $('<td>').text(getTypeName(data.rooms[i].RoomTypeID)),
+                                $('<td>').text(data.rooms[i].RoomStatus),
+                                $('<td>').html(getUtilitiesIcons(getUtilities(data.rooms[i].RoomID))), // Sử dụng hàm getUtilitiesIcons để hiển thị các biểu tượng
+                                $('<td>').html('<button class="btn btn-sm btn-warning" name="update" onclick="editRoomPrice(' + data.rooms[i].RoomID + ')"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp <button class="btn btn-sm btn-danger" name="deleted" onclick="deletedRoomPrice(' + data.rooms[i].RoomID + ')"><i class="fa fa-trash" aria-hidden="true"></i></button>&nbsp')
+                            );
+                            tableBody.append(roomRow);
+                        }
+
+                        roomTable.append(tableHeader).append(tableBody);
+
+                        // Hiển thị bảng trong phần tử có id là 'roomList'
+                        $('#roomList').html(roomTable);
+                    } else {
+                        console.log("Lỗi khi lấy danh sách phòng: " + data.msg);
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error); // Hiển thị lỗi trong console nếu có
+                }
+            });
+        }
+        // Hàm này gọi phương thức API để lấy TypeName từ RoomType
+        function getTypeName(typeID) {
+            var typeName;
+            $.ajax({
+                url: '/Reception/Room/GetTypeName',
+                type: 'GET',
+                async: false, // Sử dụng synchronous để đảm bảo giá trị được trả về trước khi tiếp tục
+                data: { typeID: typeID },
+                success: function (data) {
+                    typeName = data.typeName;
+                },
+                error: function (error) {
+                    console.log("Lỗi khi lấy TypeName: " + error);
+                }
+            });
+            return typeName;
+        }
+        $(document).ready(function () {
+            $('#table-room-lst').DataTable();
+        });
+    function deletedRoomPrice(roomID) {
+        // Gọi phương thức API để xóa phòng
+        $.ajax({
+            url: '/Reception/Room/DeleteRoom',
+            type: 'POST',
+            data: { roomID: roomID },
+            success: function (data) {
+                if (data.code === 200) {
+                    // Refresh danh sách phòng sau khi xóa thành công
+                    loadAreaOptions();
+                    getRoomsByArea($('#areaSelect').val());
+                } else {
+                    console.log("Lỗi khi xóa phòng: " + data.msg);
+                }
+            },
+            error: function (error) {
+                console.log("Lỗi khi xóa phòng: " + error);
+            }
+        });
+    }
+</script>
+}

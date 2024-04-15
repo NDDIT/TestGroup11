@@ -1,0 +1,33 @@
+﻿@model List<LuxuryHotel.Models.Image>
+
+<div id="carousel2" class="carousel slide">
+    <ol class="carousel-indicators">
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <li data-target="#carousel2" data-slide-to="@i" class="@((i == 0) ? "active" : "")"></li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        @if (!Model.Any())
+        {
+            <!-- Nếu danh sách rỗng, hiển thị ảnh mặc định -->
+            <div class="item active">
+                <img  src="~/Admin/Images/User/about/about_3.jpg" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook" style="width:400px;">
+              
+            </div>
+        }
+        else
+        {
+            <!-- Nếu danh sách không rỗng, hiển thị dữ liệu thực tế -->
+            foreach (var image in Model)
+            {
+                <div class="item @(image == Model.First() ? "active" : "")">
+                    <img  src="/Admin/Images/Room/@image.ImagePath" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook" style="width:400px;">
+                    
+                </div>
+            }
+        }
+    </div>
+    <a class="left carousel-control" href="#carousel2" data-slide="prev"><span class="icon- prev"></span></a>
+    <a class="right carousel-control" href="#carousel2" data-slide="next"><span class="icon-next"></span></a>
+</div>

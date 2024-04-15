@@ -1,0 +1,12 @@
+﻿
+.img-book {
+    position: relative;
+}
+
+.img-book img {
+    transition: transform 0.3s ease;
+}
+ .img-book img:hover {
+    transform: scale(1.1);
+}
+

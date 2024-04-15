@@ -1,0 +1,117 @@
+﻿<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>LUXURY HOTEL</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.png">
+
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link href="~/Content/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/themify-icons.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/nice-select.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/gijgo.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/slicknav.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/1.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/font1.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/2.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/3.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/4.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+</head>
+
+<body>
+    @Html.Partial("NavPartial")
+
+    @RenderSection("slider", required: false)
+
+
+
+
+    @RenderBody()
+
+    @Html.Partial("FooterPartial")
+
+
+
+
+    <!-- JS here -->
+    <script src="~/Scripts/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/Scripts/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/js/popper.min.js"></script>
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/js/isotope.pkgd.min.js"></script>
+    <script src="~/Scripts/js/ajax-form.js"></script>
+    <script src="~/Scripts/js/waypoints.min.js"></script>
+    <script src="~/Scripts/js/jquery.counterup.min.js"></script>
+    <script src="~/Scripts/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Scripts/js/scrollIt.js"></script>
+    <script src="~/Scripts/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Scripts/js/wow.min.js"></script>
+    <script src="~/Scripts/js/nice-select.min.js"></script>
+    <script src="~/Scripts/js/jquery.slicknav.min.js"></script>
+    <script src="~/Scripts/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/js/plugins.js"></script>
+    <script src="~/Scripts/js/gijgo.min.js"></script>
+    <!--contact js-->
+    <script src="~/Scripts/js/contact.js"></script>
+    <script src="~/Scripts/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Scripts/js/jquery.form.js"></script>
+    <script src="~/Scripts/js/jquery.validate.min.js"></script>
+    <script src="~/Scripts/js/mail-script.js"></script>
+    <script src="~/Scripts/js/main.js"></script>
+    <script>
+    $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+        });
+        $('#datepicker2').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+
+        });</script>
+    <script>
+        // Lấy thời gian hiện tại
+        function setMinDateTime() {
+            var currentTime = new Date();
+
+            // Thêm 1 giờ vào thời gian hiện tại
+            currentTime.setHours(currentTime.getHours() + 1);
+
+            // Format thời gian để có thể đặt giá trị cho input
+            var formattedTimein = currentTime.toISOString().slice(0, 16);
+
+            // Đặt giá trị cho input datetime-local
+            document.getElementById('checkindate').min = formattedTimein;
+            currentTime.setHours(currentTime.getHours() + 1);
+            var formattedTimeout = currentTime.toISOString().slice(0, 16);
+            document.getElementById('checkoutdate').min = formattedTimeout;
+        }
+        window.onload = setMinDateTime;
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+﻿@using LuxuryHotel.Models
+
+<link href="~/Content/css/1.css" rel="stylesheet" />
+<link href="~/Content/css/font1.css" rel="stylesheet" />
+<link href="~/Content/css/2.css" rel="stylesheet" />
+<link href="~/Content/css/3.css" rel="stylesheet" />
+<link href="~/Content/css/4.css" rel="stylesheet" />
+
+<!-- slider_area_start -->
+<div class="slider_area">
+    <div class="slider_active owl-carousel">
+        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1" ; style="background-image: url('../../images/banner/banner.png');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="search-form" name="gs" method="submit" role="search" action="#">
+                            <div class="row">
+                                <div class="col-lg-3 align-self-center">
+                                    <fieldset>
+                                        <select name="area" class="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
+                                            <option selected>All Areas</option>
+                                            <option value="New Village">New Village</option>
+                                            <option value="Old Town">Old Town</option>
+                                            <option value="Modern City">Modern City</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-3 align-self-center">
+                                    <fieldset>
+                                        <input type="address" name="address" class="searchText" placeholder="Enter a location" autocomplete="on" required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-3 align-self-center">
+                                    <fieldset>
+                                        <select name="price" class="form-select" aria-label="Default select example" id="chooseCategory" onchange="this.form.click()">
+                                            <option selected>Price Range</option>
+                                            @if (Model != null)
+                                            {
+                                                foreach (var roomType in Model)
+                                                {
+                                                    <option value="@roomType.PriceByDay">$@roomType.PriceByDay - By Day</option>
+                                                    <option value="@roomType.OverNightPrice">$@roomType.OverNightPrice - Over Night</option>
+                                                    <option value="@roomType.PricePerHour">$@roomType.PricePerHour - Per Hour</option>
+                                                }
+                                            }
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-3">
+                                    <fieldset>
+                                        <button class="main-button"><i class="fa fa-search"></i> Search Now</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="slider_text text-center">
+                            <h3>LUXURY HOTEL</h3>
+                            <p>ENJOY THE GREAT MOMENTS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single_slider  d-flex align-items-center justify-content-center slider_bg_2" ; style="background-image: url('../../images/banner/banner2.png');">
+            <div class="container">
+                <form id="search-form" name="gs" method="submit" role="search" action="#">
+                    <div class="row">
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <select name="area" class="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
+                                    <option selected>All Areas</option>
+                                    <option value="New Village">New Village</option>
+                                    <option value="Old Town">Old Town</option>
+                                    <option value="Modern City">Modern City</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <input type="address" name="address" class="searchText" placeholder="Enter a location" autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <select name="price" class="form-select" aria-label="Default select example" id="chooseCategoryPrice" onchange="this.form.click()">
+                                    <option selected>Price Range</option>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var roomType in Model)
+                                        {
+                                            <option value="@roomType.PriceByDay">$@roomType.PriceByDay - By Day</option>
+                                            <option value="@roomType.OverNightPrice">$@roomType.OverNightPrice - Over Night</option>
+                                            <option value="@roomType.PricePerHour">$@roomType.PricePerHour - Per Hour</option>
+                                        }
+                                    }
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3">
+                            <fieldset>
+                                <button class="main-button"><i class="fa fa-search"></i><a href="~/Controllers/SearchController.cs"></a> Search Now</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="slider_text text-center">
+                            <h3>LIFE IS BEAUTIFUL</h3>
+                            <p>EXPERIENCES WORTH TRYING</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1" ; style="background-image: url('../../images/banner/banner4.jpg');">
+            <div class="container">
+                <form id="search-form" name="gs" method="submit" role="search" action="#">
+                    <div class="row">
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <select name="area" class="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
+                                    <option selected>All Areas</option>
+                                    <option value="New Village">New Village</option>
+                                    <option value="Old Town">Old Town</option>
+                                    <option value="Modern City">Modern City</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <input type="address" name="address" class="searchText" placeholder="Enter a location" autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <select name="price" class="form-select" aria-label="Default select example" id="chooseCategoryPrice" onchange="this.form.click()">
+                                    <option selected>Price Range</option>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var roomType in Model)
+                                        {
+                                            <option value="@roomType.PriceByDay">$@roomType.PriceByDay - By Day</option>
+                                            <option value="@roomType.OverNightPrice">$@roomType.OverNightPrice - Over Night</option>
+                                            <option value="@roomType.PricePerHour">$@roomType.PricePerHour - Per Hour</option>
+                                        }
+                                    }
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3">
+                            <fieldset>
+                                <button class="main-button"><i class="fa fa-search"></i> Search Now</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="slider_text text-center">
+                            <h3>SHARING THE FEELINGS</h3>
+                            <p>YOU SAY, WE'LL DO IT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single_slider d-flex align-items-center justify-content-center slider_bg_2" style="background-image: url('../../images/banner/banner3.jpg');">
+            <div class="container">
+                <form id="search-form" name="gs" method="submit" role="search" action="#">
+                    <div class="row">
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <select name="area" class="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
+                                    <option selected>All Areas</option>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var kv in Model)
+                                        {
+                                            <option value="@kv.ROOM.Area">@kv.ROOM.Area</option>
+
+                                        }
+                                    }
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <input type="address" name="address" class="searchText" placeholder="Enter a location" autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3 align-self-center">
+                            <fieldset>
+                                <select name="price" class="form-select" aria-label="Default select example" id="chooseCategoryPrice" onchange="this.form.click()">
+                                    <option selected>Price Range</option>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var roomType in Model)
+                                        {
+                                            <option value="@roomType.PriceByDay">$@roomType.PriceByDay - By Day</option>
+                                            <option value="@roomType.OverNightPrice">$@roomType.OverNightPrice - Over Night</option>
+                                            <option value="@roomType.PricePerHour">$@roomType.PricePerHour - Per Hour</option>
+                                        }
+                                    }
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-3">
+                            <fieldset>
+                                <button class="main-button"><i class="fa fa-search"></i> Search Now</button>
+                                <a href="#" class="line-button" onclick="redirectToSearch()">Search Now</a>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="slider_text text-center">
+                            <h3>SERVICE IS EVERYWHERE</h3>
+                            <p>WE ARE HERE TO SERVE YOU</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- slider_area_end -->
+<script>
+    function redirectToSearchPage(formId) {
+        const searchForm = document.getElementById(formId);
+        if (searchForm) {
+            window.location.href = 'Search';
+        }
+    }
+</script>
+<script src="~/Scripts/js/1.js"></script>
+<script src="~/Scripts/js/2.js"></script>
+<script src="~/Scripts/js/3.js"></script>
+<script src="~/Scripts/js/4.js"></script>
+<script src="~/Scripts/js/5.js"></script>
+<script src="~/Scripts/js/6.js"></script>

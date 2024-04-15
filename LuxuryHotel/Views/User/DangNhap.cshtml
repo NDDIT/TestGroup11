@@ -1,0 +1,93 @@
+﻿@{
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <link href="~/Content/Content/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+</head>
+<body>
+    <!-- Form with bootstrap styles -->
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-action-left">
+                <form method="post" class="auth-form-outer login-form">
+                    @using (Html.BeginForm("DangNhap", "User", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true)
+
+                        <h2 class="auth-form-title">
+                            Sign In
+                        </h2>
+
+
+                        <div class="form-group first">
+                            <label for="user">Tên đăng nhập</label>
+                            @if (Request.Cookies["User"] != null)
+                            {
+                                @Html.TextBox("User", Request.Cookies["User"].Value, new { @class = "form-control" })
+                                @Html.ValidationMessage("Err1", "", new { @class = "text-danger" })
+                            }
+                            else
+                            {
+                                @Html.TextBox("User", null, new { @class = "form-control" })
+                                @Html.ValidationMessage("Err1", "", new { @class = "text-danger" })
+                            }
+                        </div>
+
+                        <div class="form-group last mb-4">
+                            <label for="Password">Mật khẩu</label>
+                            <div class="input-icon">
+                                @if (Request.Cookies["Password"] != null)
+                                {
+                                    @Html.Password("Password", Request.Cookies["Password"].Value, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Err2", "", new { @class = "text-danger" })
+                                }
+                                else
+                                {
+                                    @Html.Password("Password", null, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Err2", "", new { @class = "text-danger" })
+                                }
+                                <i class="fa fa-eye show-password"></i>
+                            </div>
+                        </div>
+
+                        <label class="btn active">
+                            <input type="checkbox" name="remember" checked>
+                            <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>
+                            <span> Remember me</span>
+                        </label>
+
+                        <div class="footer-action">
+                            <input type="submit" value="Sign In" class="auth-submit">
+                            <a href="@Url.Action("DangKy", "User")" class="auth-btn-direct">Sign Up</a>
+                        </div>
+
+                        <div class="auth-forgot-password">
+                            <a href="#">Forgot Password</a>
+                        </div>
+                    }
+                </form>
+            </div>
+            <div class="auth-action-right">
+                <div class="auth-image">
+                    <img src="~/Content/images/vector.jpg" alt="login" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/common.js"></script>
+</body>
+</html>
+
+
+
+
+
+

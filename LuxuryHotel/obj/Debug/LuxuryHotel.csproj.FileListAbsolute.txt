@@ -1,0 +1,281 @@
+C:\KhachSan\LuxuryHotel\bin\LuxuryHotel.dll.config
+C:\KhachSan\LuxuryHotel\bin\LuxuryHotel.dll
+C:\KhachSan\LuxuryHotel\bin\LuxuryHotel.pdb
+C:\KhachSan\LuxuryHotel\bin\roslyn\csc.exe
+C:\KhachSan\LuxuryHotel\bin\roslyn\csc.exe.config
+C:\KhachSan\LuxuryHotel\bin\roslyn\csc.rsp
+C:\KhachSan\LuxuryHotel\bin\roslyn\csi.exe
+C:\KhachSan\LuxuryHotel\bin\roslyn\csi.exe.config
+C:\KhachSan\LuxuryHotel\bin\roslyn\csi.rsp
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.targets
+C:\KhachSan\LuxuryHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Buffers.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Collections.Immutable.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Memory.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Numerics.Vectors.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Reflection.Metadata.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\KhachSan\LuxuryHotel\bin\roslyn\vbc.exe
+C:\KhachSan\LuxuryHotel\bin\roslyn\vbc.exe.config
+C:\KhachSan\LuxuryHotel\bin\roslyn\vbc.rsp
+C:\KhachSan\LuxuryHotel\bin\roslyn\VBCSCompiler.exe
+C:\KhachSan\LuxuryHotel\bin\roslyn\VBCSCompiler.exe.config
+C:\KhachSan\LuxuryHotel\bin\Antlr3.Runtime.dll
+C:\KhachSan\LuxuryHotel\bin\EntityFramework.dll
+C:\KhachSan\LuxuryHotel\bin\EntityFramework.SqlServer.dll
+C:\KhachSan\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\KhachSan\LuxuryHotel\bin\Microsoft.Web.Infrastructure.dll
+C:\KhachSan\LuxuryHotel\bin\Newtonsoft.Json.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.Helpers.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.Mvc.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.Optimization.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.Razor.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.WebPages.Deployment.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.WebPages.dll
+C:\KhachSan\LuxuryHotel\bin\System.Web.WebPages.Razor.dll
+C:\KhachSan\LuxuryHotel\bin\WebGrease.dll
+C:\KhachSan\LuxuryHotel\bin\X.PagedList.Mvc.PagedListExt.dll
+C:\KhachSan\LuxuryHotel\bin\EntityFramework.xml
+C:\KhachSan\LuxuryHotel\bin\EntityFramework.SqlServer.xml
+C:\KhachSan\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\KhachSan\LuxuryHotel\bin\Newtonsoft.Json.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.Helpers.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.Mvc.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.Razor.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.WebPages.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.WebPages.Deployment.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.WebPages.Razor.xml
+C:\KhachSan\LuxuryHotel\bin\System.Web.Optimization.xml
+C:\KhachSan\LuxuryHotel\bin\Antlr3.Runtime.pdb
+C:\KhachSan\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.AssemblyReference.cache
+C:\KhachSan\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CoreCompileInputs.cache
+C:\KhachSan\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CopyComplete
+C:\KhachSan\LuxuryHotel\obj\Debug\LuxuryHotel.dll
+C:\KhachSan\LuxuryHotel\obj\Debug\LuxuryHotel.pdb
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\LuxuryHotel.dll.config
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\LuxuryHotel.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\LuxuryHotel.pdb
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\csc.exe
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\csc.exe.config
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\csc.rsp
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\csi.exe
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\csi.exe.config
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\csi.rsp
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Buffers.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Memory.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\vbc.exe
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\vbc.exe.config
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\vbc.rsp
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\VBCSCompiler.exe
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Antlr3.Runtime.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\EntityFramework.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\EntityFramework.SqlServer.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Newtonsoft.Json.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Helpers.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Mvc.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Optimization.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Razor.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.WebPages.Deployment.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.WebPages.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.WebPages.Razor.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\WebGrease.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\X.PagedList.Mvc.PagedListExt.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\EntityFramework.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\EntityFramework.SqlServer.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Newtonsoft.Json.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Helpers.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Mvc.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Razor.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.WebPages.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.WebPages.Deployment.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.WebPages.Razor.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\System.Web.Optimization.xml
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\bin\Antlr3.Runtime.pdb
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.AssemblyReference.cache
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CoreCompileInputs.cache
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CopyComplete
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\obj\Debug\LuxuryHotel.dll
+C:\Users\DUY DƯƠNG\source\repos\LuxuryHotel\obj\Debug\LuxuryHotel.pdb
+C:\KhachSan\LuxuryHotel\bin\PagedList.dll
+C:\KhachSan\LuxuryHotel\bin\PagedList.Mvc.dll
+C:\KhachSan\LuxuryHotel\bin\System.Linq.Dynamic.dll
+C:\KhachSan\LuxuryHotel\bin\PagedList.xml
+C:\KhachSan\LuxuryHotel\bin\PagedList.Mvc.xml
+C:\Luxury\LuxuryHotel\bin\LuxuryHotel.dll.config
+C:\Luxury\LuxuryHotel\bin\LuxuryHotel.dll
+C:\Luxury\LuxuryHotel\bin\LuxuryHotel.pdb
+C:\Luxury\LuxuryHotel\bin\roslyn\csc.exe
+C:\Luxury\LuxuryHotel\bin\roslyn\csc.exe.config
+C:\Luxury\LuxuryHotel\bin\roslyn\csc.rsp
+C:\Luxury\LuxuryHotel\bin\roslyn\csi.exe
+C:\Luxury\LuxuryHotel\bin\roslyn\csi.exe.config
+C:\Luxury\LuxuryHotel\bin\roslyn\csi.rsp
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Luxury\LuxuryHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Buffers.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Collections.Immutable.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Memory.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Numerics.Vectors.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Reflection.Metadata.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Luxury\LuxuryHotel\bin\roslyn\vbc.exe
+C:\Luxury\LuxuryHotel\bin\roslyn\vbc.exe.config
+C:\Luxury\LuxuryHotel\bin\roslyn\vbc.rsp
+C:\Luxury\LuxuryHotel\bin\roslyn\VBCSCompiler.exe
+C:\Luxury\LuxuryHotel\bin\roslyn\VBCSCompiler.exe.config
+C:\Luxury\LuxuryHotel\bin\Antlr3.Runtime.dll
+C:\Luxury\LuxuryHotel\bin\Calabonga.Mvc.PagedListExt.dll
+C:\Luxury\LuxuryHotel\bin\EntityFramework.dll
+C:\Luxury\LuxuryHotel\bin\EntityFramework.SqlServer.dll
+C:\Luxury\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Luxury\LuxuryHotel\bin\Microsoft.Web.Infrastructure.dll
+C:\Luxury\LuxuryHotel\bin\Newtonsoft.Json.dll
+C:\Luxury\LuxuryHotel\bin\PagedList.dll
+C:\Luxury\LuxuryHotel\bin\PagedList.Mvc.dll
+C:\Luxury\LuxuryHotel\bin\System.Linq.Dynamic.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.Helpers.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.Mvc.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.Optimization.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.Razor.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.WebPages.Deployment.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.WebPages.dll
+C:\Luxury\LuxuryHotel\bin\System.Web.WebPages.Razor.dll
+C:\Luxury\LuxuryHotel\bin\WebGrease.dll
+C:\Luxury\LuxuryHotel\bin\X.PagedList.Mvc.PagedListExt.dll
+C:\Luxury\LuxuryHotel\bin\EntityFramework.xml
+C:\Luxury\LuxuryHotel\bin\EntityFramework.SqlServer.xml
+C:\Luxury\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Luxury\LuxuryHotel\bin\Newtonsoft.Json.xml
+C:\Luxury\LuxuryHotel\bin\PagedList.xml
+C:\Luxury\LuxuryHotel\bin\PagedList.Mvc.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.Helpers.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.Mvc.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.Razor.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.WebPages.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.WebPages.Deployment.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.WebPages.Razor.xml
+C:\Luxury\LuxuryHotel\bin\System.Web.Optimization.xml
+C:\Luxury\LuxuryHotel\bin\Antlr3.Runtime.pdb
+C:\Luxury\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.AssemblyReference.cache
+C:\Luxury\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CoreCompileInputs.cache
+C:\Luxury\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CopyComplete
+C:\Luxury\LuxuryHotel\obj\Debug\LuxuryHotel.dll
+C:\Luxury\LuxuryHotel\obj\Debug\LuxuryHotel.pdb
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\LuxuryHotel.dll.config
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\LuxuryHotel.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\LuxuryHotel.pdb
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\csc.exe
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\csc.exe.config
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\csc.rsp
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\csi.exe
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\csi.exe.config
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\csi.rsp
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Buffers.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Memory.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\vbc.exe
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\vbc.exe.config
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\vbc.rsp
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\VBCSCompiler.exe
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Antlr3.Runtime.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Calabonga.Mvc.PagedListExt.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\EntityFramework.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\EntityFramework.SqlServer.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Newtonsoft.Json.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\PagedList.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\PagedList.Mvc.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Linq.Dynamic.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Helpers.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Mvc.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Optimization.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Razor.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.WebPages.Deployment.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.WebPages.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.WebPages.Razor.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\WebGrease.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\X.PagedList.Mvc.PagedListExt.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\EntityFramework.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\EntityFramework.SqlServer.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Newtonsoft.Json.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\PagedList.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\PagedList.Mvc.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Helpers.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Mvc.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Razor.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.WebPages.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.WebPages.Deployment.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.WebPages.Razor.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\System.Web.Optimization.xml
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\bin\Antlr3.Runtime.pdb
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.AssemblyReference.cache
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CoreCompileInputs.cache
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\obj\Debug\LuxuryHotel.csproj.CopyComplete
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\obj\Debug\LuxuryHotel.dll
+C:\Users\DUY DƯƠNG\Desktop\Khách sạn\LuxuryHotel\obj\Debug\LuxuryHotel.pdb

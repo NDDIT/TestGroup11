@@ -1,0 +1,234 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+        .img-col {
+            max-width: 100px;
+        }
+
+        .mgt {
+            margin-top: 16px;
+        }
+
+        .table-and-form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #editFormContainer {
+            width: 30%;
+            display: none;
+        }
+
+        .row {
+            width: calc(100% - 30%);
+            text-align: right;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        var dataTable = $('#tblRoomPrice').DataTable({
+            "searching": true,
+            "ordering": true
+        });
+
+        function showEditForm(utilities) {
+            $('#editFormContainer').show();
+            $('#editUtilitiesID').val(utilities.UtilitiesID);
+            $('#editUtilitiesName').val(utilities.UtilitiesName);
+            $('#editUtilitiesPicture').val(utilities.UtilitiesPicture);
+            $('#btn-delete').show();
+        }
+
+        function showCreateForm() {
+            $('#editFormContainer').show();
+            $('#editUtilitiesID').val('0');
+            $('#editUtilitiesName').val('');
+            $('#editUtilitiesPicture').val('');
+            $('#btn-delete').hide(); // Hide delete button for new entry
+        }
+
+        function loadUtilities(dataTable) {
+            $.ajax({
+                url: '/Reception/Utilities/GetUtilities',
+                type: 'get',
+                success: function (data) {
+                    if (data.code === 200) {
+                        console.log(data);
+
+                        if (dataTable) {
+                            dataTable.clear();
+
+                            $.each(data.utilities, function (k, v) {
+                                let s = '<tr id="' + v.UtilitiesID + '">';
+                                s += '<td style="text-align: left;">' + v.UtilitiesName + '</td>';
+                                s += '<td> <img src="/Admin/Images/Room/' + v.UtilitiesPicture + '" loading="lazy" style="width:20px; height:20px; margin:5px" /></td>';
+                                s += '<td class="col-ms-3 text-right">';
+                                s += '<button class="btn btn-sm btn-warning" name="update" onclick="editUtilities(' + v.UtilitiesID + ')"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp';
+                                s += '</td>';
+                                s += '</tr>';
+                                dataTable.row.add($(s));
+                            });
+
+                            dataTable.draw();
+                        }
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadUtilities(dataTable);
+        });
+
+        function deleteUtilities() {
+            var utilitiesID = $('#editUtilitiesID').val();
+
+            if (confirm('Bạn có chắc muốn xóa dịch vụ này không?')) {
+                $.ajax({
+                    url: '/Reception/Utilities/CheckAndDeleteUtilities',
+                    type: 'post',
+                    data: {
+                        UtilitiesID: utilitiesID
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            $('#editFormContainer').hide();
+                            loadUtilities(dataTable);
+                        } else {
+                            alert(data.msg);
+                        }
+                    },
+                    error: function () {
+                        alert('Đã xảy ra lỗi khi gửi dữ liệu lên server.');
+                    }
+                });
+            }
+        }
+
+        function editUtilities(id) {
+            $.ajax({
+                url: '/Reception/Utilities/GetUtilitiesDetails',
+                type: 'get',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        showEditForm(data.utilities);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+
+        function closeEditForm() {
+            $('#editFormContainer').hide();
+        }
+
+        function validateFormData() {
+            var editedUtilitiesID = $('#editUtilitiesID').val();
+            var editedUtilitiesName = $('#editUtilitiesName').val();
+            var editedUtilitiesPicture = $('#fFileUpload')[0].files[0];
+
+            return true; // You should implement your validation logic here
+        }
+
+        function submitEditForm() {
+            if (!validateFormData()) {
+                return;
+            }
+
+            var editUtilitiesID = $('#editUtilitiesID').val();
+            var editedUtilitiesName = $('#editUtilitiesName').val();
+            var editedUtilitiesPicture = $('#fFileUpload')[0].files[0];
+            var actionUrl = '/Reception/Utilities/Edit';
+
+            if (editUtilitiesID === '0') {
+                actionUrl = '/Reception/Utilities/CreateUtilities';
+            }
+
+            var formData = new FormData();
+            formData.append('UtilitiesID', editUtilitiesID);
+            formData.append('UtilitiesName', editedUtilitiesName);
+            formData.append('UtilitiesPicture', editedUtilitiesPicture);
+
+            $.ajax({
+                url: actionUrl,
+                type: 'post',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    if (data.code === 200) {
+                        $('#editFormContainer').hide();
+                        loadUtilities(dataTable);
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    alert('Đã xảy ra lỗi khi gửi dữ liệu lên server.');
+                }
+            });
+        }
+        function getUtilitiesIcons(utilities) {
+            var iconsHtml = '';
+            $.each(utilities, function (i, utility) {
+                iconsHtml += '<img src="/Admin/Images/icon-ul/' + utility.UtilitiesPicture + '" loading="lazy" style="width:20px; height:20px; margin:5px" /> ';
+            });
+            return iconsHtml;
+        }
+    </script>
+}
+
+<button type="button" class="btn btn-success" onclick="showCreateForm()" style="width:80px">Create</button>
+
+<div class="table-and-form-container">
+    <div class="table-responsive mgt" style="width:80%">
+        <table id="tblRoomPrice" class="table table-striped" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tên dịch vụ</th>
+                    <th>Hình dịch vụ</th>
+                    <th class="col-ms-3 text-right">Các chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div id="editFormContainer">
+
+
+        <form id="editForm">
+            <div class="form-group">
+                <input type="hidden" id="editUtilitiesID" name="UtilitiesID" />
+            </div>
+            <div class="form-group">
+                <label for="editUtilitiesName">Tên dịch vụ:</label>
+                <input type="text" class="form-control" id="editUtilitiesName">
+            </div>
+            <div class="form-group">
+                <label for="fFileUpload">Hình dịch vụ:</label>
+                <input type="file" class="form-control" id="fFileUpload" accept="image/*">
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="submitEditForm()">Submit</button>
+            <button type="button" class="btn btn btn-danger" id="btn-delete" onclick="deleteUtilities()">Delete</button>
+            <button type="button" class="btn btn-secondary" onclick="closeEditForm()">Close</button>
+        </form>
+    </div>
+</div>

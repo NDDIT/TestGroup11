@@ -1,0 +1,237 @@
+﻿@model List<LuxuryHotel.Models.Image>
+
+@{
+    ViewBag.Title = "Quản lý ảnh";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@section customStyles {
+    <style>
+        #page-edit-img {
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+
+        #imageContainer {
+            position: absolute;
+            width: 60%;
+            left: 10px;
+        }
+
+        #form-create-edit {
+            position: absolute;
+            width: 35%;
+            right: 10px;
+            display: none;
+        }
+
+        #item img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        #item span {
+            position: absolute;
+            top: 1px;
+            right: 20px;
+        }
+
+            #item span:hover {
+                font-weight: 700;
+                color: red;
+                cursor: pointer;
+            }
+        #imageContainer img{
+            border-radius:5%;
+        }
+    </style>
+}
+
+<input type="hidden" name="IDRoom" id="txtRoomID" value="@ViewBag.roomID" />
+<button type="button" class="btn btn-success" onclick="showCreateForm()" style="width:80px; margin:20px">Create</button>
+
+<div id="page-edit-img">
+    <div id="imageContainer" class="row">
+        <!-- Các hình ảnh sẽ được thêm vào đây -->
+    </div>
+
+    <div id="form-create-edit">
+
+
+        @using (Html.BeginForm("Create", "Image", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="roomID" id="txtRoomID" value="@ViewBag.roomID" />
+            <div class="form-group">
+                <label for="editPriceFirstHour">Ảnh:</label>
+                <input type="file" class="form-control" id="fFileUpload" name="fFileUpload" required>
+            </div>
+            <div class="form-group">
+                <label for="editPriceOverTime">Ưu tiên:</label>
+                <input type="number" name="" class="form-control" id="iOderID" min="1" required>
+            </div>
+
+            <!-- Các nút để submit hoặc đóng form -->
+            <button type="button" class="btn btn-primary" onclick="submitEditForm()">Submit</button>
+            <button type="button" class="btn btn-secondary" onclick="closeForm()">Close</button>
+        }
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Chỉnh sửa ưu tiên</h5>
+               
+            </div>
+            <div class="modal-body">
+                <input type="number" class="form-control" id="editImageID" hidden>
+                <label for="editOderID">Thứ tự ưu tiên:</label>
+                <input type="number" class="form-control" id="editOderID" required min="1">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="updateOderID()">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            loadImages();
+        });
+        // Đóng modal khi nút Đóng hoặc close được nhấn
+        $('#editModal').on('hidden.bs.modal', function () {
+            // Xóa giá trị trong các trường input của modal khi modal được đóng
+            $('#editImageID').val('');
+            $('#editOderID').val('');
+            $(this).modal('hide');
+        });
+        $('#btnClose').on('click', function () {
+            // Đặt lại giá trị các trường input khi đóng modal
+            $('#editImageID').val('');
+            $('#editOderID').val('');
+
+            // Đóng modal
+            $('#editModal').modal('hide');
+        });
+        function loadImages() {
+            var roomID = $('#txtRoomID').val();
+
+            $.ajax({
+                url: '/Reception/Image/GetImages',
+                type: 'get',
+                data: { roomID: roomID },
+                success: function (data) {
+                    if (data.code === 200) {
+                        console.log(data);
+                        var imageContainer = $('#imageContainer');
+                        imageContainer.empty();
+
+                        $.each(data.images, function (i, images) {
+                            var imageDiv = $('<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" id="item">');
+                            imageDiv.append(`<img src="/Admin/Images/Room/${images.ImagePath}" onclick="showEditModal(${images.ImageID},${images.OderID})" loading="lazy"  />`);
+                            imageDiv.append(`<span onclick="deleteImage(${images.ImageID})">X</span></div>`);
+                            imageContainer.append(imageDiv);
+                        });
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+
+        function deleteImage(imageID) {
+            $.ajax({
+                url: '/Reception/Image/DeleteImage',
+                type: 'post',
+                data: { imageID: imageID },
+                success: function (data) {
+                    if (data.code === 200) {
+                        loadImages();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+
+        function showCreateForm() {
+            $('#form-create-edit').show();
+            $('#iOderID').val('1');
+        }
+
+        function closeForm() {
+            $('#form-create-edit').hide();
+        }
+
+        function submitEditForm() {
+        // Lấy giá trị từ các trường input
+            var formData = new FormData();
+            formData.append('roomID', $('#txtRoomID').val());
+            formData.append('fFileUpload', $('#fFileUpload')[0].files[0]);
+            formData.append('iOderID', $('#iOderID').val());
+        // Thực hiện AJAX request để gửi dữ liệu đến server
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "Image")',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                // Xử lý kết quả thành công
+                loadImages();
+                alert("Form submitted successfully!");
+                // Có thể thêm các hành động khác tại đây (chẳng hạn, làm mới trang, đóng form, vv.)
+            },
+            error: function (error) {
+                // Xử lý lỗi
+                alert("Error submitting form: " + error.statusText);
+            }
+        });
+    }
+        function showEditModal(imageID, oderID) {
+            // Đặt giá trị Oder ID ban đầu của modal
+            $('#editImageID').val(imageID);
+            $('#editOderID').val(oderID);
+            // Hiển thị modal
+            $('#editModal').modal('show');
+        }
+
+        function updateOderID() {
+            var newOderID = $('#editOderID').val();
+            var ImageID = $('#editImageID').val();
+
+            // Thực hiện AJAX request để cập nhật Oder ID trên server
+            $.ajax({
+                url: '/Reception/Image/UpdateOderID',
+                type: 'post',
+                data: { imageID: ImageID, oderID: newOderID },
+                success: function (data) {
+                    if (data.code === 200) {
+                        // Đóng modal sau khi cập nhật thành công
+                        $('#editModal').modal('hide');
+
+                        // Tải lại danh sách hình ảnh
+                        loadImages();
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function (error) {
+                    alert("Error updating Oder ID: " + error.statusText);
+                }
+            });
+        }
+        
+
+        
+
+    </script>
+}

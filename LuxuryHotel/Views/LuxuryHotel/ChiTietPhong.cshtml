@@ -1,0 +1,284 @@
+﻿@model LuxuryHotel.Models.ROOM
+@using System.Linq
+<link href="~/Content/Content/Styles.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "ChiTietPhong";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    #Che {
+        width: 100%;
+        height: 100px;
+        background-color: dimgrey;
+    }
+
+    .thumbnail {
+        width: 50%;
+        margin-left: 20px;
+    }
+
+    .carousel-inner {
+        margin: 0 auto;
+    }
+
+    #chitietphong {
+        display: flex;
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #Information {
+        position: absolute;
+        width: 45%;
+        right: 0;
+        display: block;
+        min-height: 400px;
+    }
+
+        #Information h1 {
+            font-weight: 700;
+        }
+
+    #btn-datphong {
+        position: absolute;
+        bottom: 10%;
+        right: 30%;
+    }
+
+    .searchborder {
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 20px;
+        padding-top: 10px;
+    }
+
+    #search-btn {
+        border-radius: 10%;
+    }
+
+    #span-cost {
+        color: red;
+        font-weight: 700;
+    }
+    #map{
+        width:100%;
+
+    }
+</style>
+<div id="Che">
+
+</div>
+
+<div class="container searchborder">
+    <div class="row">
+        <div class="col-lg-12">
+            <form id="search-form" name="gs" method="post" role="search" action="#">
+                <div class="row">
+
+                    <div class="col-lg-6 align-self-center">
+                        <fieldset>
+                            <input id="checkindate" type="datetime-local" name="checkindate" class="searchText" autocomplete="on" required>
+
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-6 align-self-center">
+                        <fieldset>
+                            <input id="checkoutdate" type="datetime-local" name="checkoutdate" class="searchText" autocomplete="on" required>
+
+                        </fieldset>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div id="chitietphong">
+
+
+    <div class="thumbnail">
+
+        <div id="carousel2" class="carousel slide">
+            <ol class="carousel-indicators">
+                @{
+                    int i = 0; // Di chuyển khai báo ra khỏi vòng lặp
+                }
+                @foreach (var image in ViewBag.ImagesRoom)
+                {
+
+                    <li data-target="#carousel2" data-slide-to="@i" class="@((i == 0) ? "active" : "")"></li>
+                    i++;
+                }
+            </ol>
+            <div class="carousel-inner">
+                @if (ViewBag.ImagesRoom.Count == 0)
+                {
+                    <div class="item active">
+                        <iframe src="https://www.facebook.com/plugins/video.php?height=280&href=https%3A%2F%2Fwww.facebook.com%2Fhinhanh360%2Fvideos%2F1804077803190325%2F&show_text=false&width=560&t=0" width="100%" height="400px" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                    </div>
+
+                }
+                else
+                {
+
+                    int j = 0; // Di chuyển khai báo ra khỏi vòng lặp
+
+                    <!-- Nếu danh sách không rỗng, hiển thị dữ liệu thực tế -->
+                    foreach (var image in ViewBag.ImagesRoom)
+                    {
+
+                        <div class="item @(j == 0 ? "active" : "")">
+                            <img src="@Url.Content("~/Admin/Images/Room/" + image.ImagePath)" alt="Room Image" class="img-responsive img-rounded imgbook" style="width:100%; height:400px">
+                        </div>
+                        j++;
+                    }
+                }
+            </div>
+            <a class="left carousel-control" href="#carousel2" data-slide="prev"><span class="icon-prev"></span></a>
+            <a class="right carousel-control" href="#carousel2" data-slide="next"><span class="icon-next"></span></a>
+        </div>
+    </div>
+    <div id="Information">
+        <h1> @Model.RoomName </h1>
+        <h3> Loại Phòng: @ViewBag.TypeName</h3>
+        <span> Khu vực: @ViewBag.Area</span>
+        <div>
+            Tiện ích:
+            @foreach (var uti in ViewBag.Utulities)
+            {
+                <img src="/Admin/Images/Room/@uti.UtilitiesPicture" loading="lazy" style="width:20px; height:20px; margin:5px" />
+            }
+        </div>
+        <div>
+            Giờ đầu:
+            <span id="costfirsthour" value="@ViewBag.PriceFirstHour">@ViewBag.PriceFirstHour VND</span>
+        </div>
+        <div>
+            Giờ sau:
+            <span id="costperhour" value="@ViewBag.PricePerHour">@ViewBag.PricePerHour VND</span>
+        </div>
+        <div>
+            Qua đêm:
+            <span id="costovernight" value="@ViewBag.OverNightPrice">@ViewBag.PricePerHour VND</span>
+        </div>
+        <div>
+            Theo Ngày:
+            <span id="costperday" value="@ViewBag.PricePerDay">@ViewBag.PricePerHour VND</span>
+        </div>
+        <div class="book_btn d-none d-lg-block" id="btn-datphong">
+            <div id="span-cost">
+                Giá:
+                <span id="cost"> </span> VND
+                <input type="hidden" id="txtcost" />
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-booking">ĐẶT PHÒNG</button>
+
+        </div>
+    </div>
+
+
+</div>
+
+@{
+    var area = ViewBag.Area;
+}
+
+<div id="map">
+    @if (area.ToString() == "Bến Tre")
+    {
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d307.0060440926522!2d106.27070057552815!3d10.18191685622416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310aa85c0cbca79f%3A0xaa3c54e567317543!2zQuG6v24gVHJlLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1702370604995!5m2!1svi!2s" style="border:0; width: 100%;height: 450px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    }
+    else if (area.ToString() == "Bình Dương")
+    {
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d420.9850517801999!2d106.55313642957071!3d10.789375007427918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529292e8d3dd1%3A0xf15f5aad773c112b!2zSOG7kyBDaMOtIE1pbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1702370234200!5m2!1svi!2s" style="border:0; width: 100%;height: 450px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    }
+    else
+    {
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d420.9850517801999!2d106.55313642957071!3d10.789375007427918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529292e8d3dd1%3A0xf15f5aad773c112b!2zSOG7kyBDaMOtIE1pbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1702370234200!5m2!1svi!2s" style="border:0; width: 100%;height: 450px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    }
+</div>
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var currentTime = new Date();
+        currentTime.setHours(currentTime.getHours() + 1);
+        var formattedTimeIN = currentTime.toISOString().slice(0, 16);
+        $('#checkindate').val(formattedTimeIN);
+        currentTime.setHours(currentTime.getHours() + 1);
+        var formattedTimeOUT = currentTime.toISOString().slice(0, 16);
+        $('#checkoutdate').val(formattedTimeOUT);
+
+        var indate = $('#checkindate').val();
+        var outdate = $('#checkoutdate').val();
+        Loadcost(indate, outdate);
+        $('#checkindate, #checkoutdate').change(function () {
+            var indate = $('#checkindate').val();
+            var outdate = $('#checkoutdate').val();
+            Loadcost(indate, outdate);
+        });
+    });
+
+    function Loadcost(indate, outdate) {
+        var hourscheck = new Date(indate).getHours();
+        var timeDifference = new Date(outdate) - new Date(indate);
+        var totalMinutes = Math.floor(timeDifference / 60000);
+        var PricePerDay = parseInt('@ViewBag.PricePerDay', 10);
+        var PricePerHour = parseInt('@ViewBag.PricePerHour', 10);
+        var OverNightPrice = parseInt('@ViewBag.OverNightPrice', 10);
+        var PriceFirstHour = parseInt('@ViewBag.PriceFirstHour', 10);
+
+
+        var totalPrice = 0;
+
+        if (totalMinutes > 600) {
+            totalPrice = ((totalMinutes / 1440) + 1) * PricePerDay;
+        } else if (hourscheck >= 22) {
+            totalPrice = OverNightPrice;
+        } else {
+            totalPrice += PriceFirstHour;
+
+            if (totalMinutes > 60) {
+                var additionalHours = Math.floor((totalMinutes - 60) / 60);
+                var additionalMinutes = (totalMinutes - 60) % 60;
+
+                totalPrice += additionalHours * PricePerHour;
+                if (additionalMinutes > 0) {
+                    totalPrice += (PricePerHour / 60) * additionalMinutes;
+                }
+            }
+        }
+        console.log(PricePerHour);
+        console.log(PricePerDay);
+        console.log(timeDifference);
+        console.log(totalPrice);
+        $('#cost').text(parseInt(totalPrice));
+        $('#txtcost').val(parseInt(totalPrice));
+
+    }
+   $('#btn-booking').click(function () {
+    var indate = $('#checkindate').val();
+    var outdate = $('#checkoutdate').val();
+    var cost = $('#txtcost').val();
+    var RoomID = parseInt('@Model.RoomID');
+
+    // Generate the URL for the BookForm action with parameters
+    var url = '@Url.Action("BookForm", "BookingRoom")' +
+              '?RoomID=' + RoomID +
+              '&checkindate=' + encodeURIComponent(indate) +
+              '&checkoutdate=' + encodeURIComponent(outdate) +
+              '&cost=' + cost;
+
+    // Redirect to the generated URL
+    window.location.href = url;
+});
+
+</script>
+

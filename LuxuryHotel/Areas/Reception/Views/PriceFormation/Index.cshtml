@@ -1,0 +1,302 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Reception/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+        .img-col {
+            max-width: 100px;
+        }
+
+        .mgt {
+            margin-top: 16px;
+        }
+
+        .table-and-form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #editFormContainer {
+            width: 30%;
+            display: none;
+        }
+        .row {
+            width: calc(100% - 30%);
+            text-align:right;
+        }
+        
+    </style>
+}
+
+@section Scripts {
+    <script>
+        var dataTable = $('#tblRoomPrice').DataTable({
+            "searching": true,
+            "ordering": true
+        });
+        function showEditForm(roomType) {
+            $('#editFormContainer').show();
+            $('#editRoomTypeId').val(roomType.RoomTypeID);
+            $('#editTypeName').val(roomType.TypeName);
+            $('#editPricePerHour').val(roomType.PricePerHour);
+            $('#editPriceByDay').val(roomType.PriceByDay);
+            $('#editOverNightPrice').val(roomType.OverNightPrice);
+            $('#editPriceFirstHour').val(roomType.PriceFirstHour);
+            $('#editPriceOverTime').val(roomType.PriceOverTime);
+            $('#btn-delete').show();
+        }
+
+        function showCreateForm() {
+
+
+            // Hiển thị form tạo mới và làm sạch giá trị
+            $('#editFormContainer').show();
+            $('#editRoomTypeId').val('0');
+            $('#editTypeName').val('');
+            $('#editPricePerHour').val('');
+            $('#editPriceByDay').val('');
+            $('#editOverNightPrice').val('');
+            $('#editPriceFirstHour').val('');
+            $('#editPriceOverTime').val('');
+            $('#btn-delete').hide();
+        }
+        function loadRoomPrice(dataTable) {
+    $.ajax({
+        url: '/Reception/PriceFormation/GetRoomPrice',
+        type: 'get',
+        success: function (data) {
+            if (data.code == 200) {
+                console.log(data);
+
+                // Kiểm tra xem dataTable đã được khởi tạo chưa
+                if (dataTable) {
+
+                    // Xóa dòng cũ
+                    dataTable.clear();
+
+                    // Thêm dữ liệu mới
+                    $.each(data.roomTypes, function (k, v) {
+                        let s = '<tr id="' + v.RoomTypeID + '">';
+                        s += '<td style="text-align: left;">' + v.TypeName + '</td>';
+                        s += '<td>' + v.PricePerHour + '</td>';
+                        s += '<td>' + v.PriceByDay + '</td>';
+                        s += '<td>' + v.OverNightPrice + '</td>';
+                        s += '<td>' + v.PriceFirstHour + '</td>';
+                        s += '<td>' + v.PriceOverTime + '</td>';
+                        s += '<td class="col-ms-3 text-right">';
+                        s += '<button class="btn btn-sm btn-warning" name="update" onclick="editRoomPrice(' + v.RoomTypeID + ')"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp';
+                        s += '</td>';
+                        s += '</tr>';
+                        dataTable.row.add($(s));
+                    });
+
+                    // Tạo lại DataTable
+                    dataTable.draw();
+                }
+            }
+        }
+    });
+    }
+        $(document).ready(function () {
+           
+
+            loadRoomPrice(dataTable);
+        });
+
+        
+
+
+
+        function deleteRoomType() {
+            var roomTypeId = $('#editRoomTypeId').val();
+
+            if (confirm('Bạn có chắc muốn xóa loại phòng này không?')) {
+                $.ajax({
+                    url: '/Reception/PriceFormation/CheckAndDeleteRoomType',
+                    type: 'post',
+                    data: {
+                        roomTypeId: roomTypeId
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            $('#editFormContainer').hide();
+                            loadRoomPrice(dataTable);
+                        } else {
+                            alert(data.msg);
+                        }
+                    },
+                    error: function () {
+                        alert('Đã xảy ra lỗi khi gửi dữ liệu lên server.');
+                    }
+                });
+            }
+        }
+
+        function editRoomPrice(id) {
+            console.log(id);
+            $.ajax({
+                url: '/Reception/PriceFormation/GetRoomTypeDetails',
+                type: 'get',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        showEditForm(data.roomType);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+
+        function closeEditForm() {
+            $('#editFormContainer').hide();
+        }
+
+        function submitEditForm() {
+            function validateFormData() {
+                var editedPricePerHour = $('#editPricePerHour').val();
+                var editedPriceByDay = $('#editPriceByDay').val();
+                var editedOverNightPrice = $('#editOverNightPrice').val();
+                var editedPriceFirstHour = $('#editPriceFirstHour').val();
+                var editedPriceOverTime = $('#editPriceOverTime').val();
+
+                if (isNaN(editedPricePerHour) || editedPricePerHour <= 0) {
+                    alert('Giá theo giờ không hợp lệ.');
+                    return false;
+                }
+
+                if (isNaN(editedPriceByDay) || editedPriceByDay <= 0) {
+                    alert('Giá theo ngày không hợp lệ.');
+                    return false;
+                }
+
+                if (isNaN(editedOverNightPrice) || editedOverNightPrice <= 0) {
+                    alert('Giá qua đêm không hợp lệ.');
+                    return false;
+                }
+
+                if (isNaN(editedPriceFirstHour) || editedPriceFirstHour <= 0) {
+                    alert('Giá giờ đầu không hợp lệ.');
+                    return false;
+                }
+
+                if (isNaN(editedPriceOverTime) || editedPriceOverTime <= 0) {
+                    alert('Giá quá giờ không hợp lệ.');
+                    return false;
+                }
+
+                return true;
+            }
+
+            if (!validateFormData()) {
+                return;
+            }
+
+            var editRoomtypeID = $('#editRoomTypeId').val();
+            var editedTypeName = $('#editTypeName').val();
+            var editedPricePerHour = $('#editPricePerHour').val();
+            var editedPriceByDay = $('#editPriceByDay').val();
+            var editedOverNightPrice = $('#editOverNightPrice').val();
+            var editedPriceFirstHour = $('#editPriceFirstHour').val();
+            var editedPriceOverTime = $('#editPriceOverTime').val();
+
+            var actionUrl = '/Reception/PriceFormation/Edit';
+
+            // Nếu RoomTypeID không tồn tại, đổi hành động sang tạo mới
+            if (editRoomtypeID === '0') {
+                actionUrl = '/Reception/PriceFormation/CreateRoomType';
+            }
+
+            $.ajax({
+                url: actionUrl,
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    RoomTypeID: editRoomtypeID,
+                    TypeName: editedTypeName,
+                    PricePerHour: editedPricePerHour,
+                    PriceByDay: editedPriceByDay,
+                    OverNightPrice: editedOverNightPrice,
+                    PriceFirstHour: editedPriceFirstHour,
+                    PriceOverTime: editedPriceOverTime
+                }),
+                success: function (data) {
+                    if (data.code === 200) {
+                        $('#editFormContainer').hide();
+                        loadRoomPrice(dataTable);
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    alert('Đã xảy ra lỗi khi gửi dữ liệu lên server.');
+                }
+            });
+        }
+    </script>
+}
+<button type="button" class="btn btn-success" onclick="showCreateForm()" style="width:80px">Create</button>
+
+<div class="table-and-form-container">
+    <div class="table-responsive mgt" style="width:80%">
+        <table id="tblRoomPrice" class="table table-striped" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tên loại phòng</th>
+                    <th>Giá theo giờ</th>
+                    <th>Giá theo ngày</th>
+                    <th>Giá qua đêm</th>
+                    <th>Giá giờ đầu</th>
+                    <th>Giá quá giờ</th>
+                    <th class="col-ms-3 text-right">Các chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="editFormContainer">
+        <form id="editForm">
+            <div class="form-group">
+                <input type="hidden" id="editRoomTypeId" name="RoomTypeID" />
+            </div>
+            <div class="form-group">
+                <label for="editTypeName">Tên loại phòng:</label>
+                <input type="text" class="form-control" id="editTypeName">
+            </div>
+            <div class="form-group">
+                <label for="editPricePerHour">Giá theo giờ:</label>
+                <input type="number" class="form-control" id="editPricePerHour">
+            </div>
+            <div class="form-group">
+                <label for="editPriceByDay">Giá theo ngày:</label>
+                <input type="number" class="form-control" id="editPriceByDay">
+            </div>
+            <div class="form-group">
+                <label for="editOverNightPrice">Giá qua đêm:</label>
+                <input type="number" class="form-control" id="editOverNightPrice">
+            </div>
+            <div class="form-group">
+                <label for="editPriceFirstHour">Giá giờ đầu:</label>
+                <input type="number" class="form-control" id="editPriceFirstHour">
+            </div>
+            <div class="form-group">
+                <label for="editPriceOverTime">Giá quá giờ:</label>
+                <input type="number" class="form-control" id="editPriceOverTime">
+            </div>
+
+            <!-- Các nút để submit hoặc đóng form -->
+            <button type="button" class="btn btn-primary" onclick="submitEditForm()">Submit</button>
+            <button type="button" class="btn btn btn-danger" id="btn-delete" onclick="deleteRoomType()">Delete</button>
+            <button type="button" class="btn btn-secondary" onclick="closeEditForm()">Close</button>
+        </form>
+    </div>
+</div>

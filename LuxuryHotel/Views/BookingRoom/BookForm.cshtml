@@ -1,0 +1,185 @@
+﻿@model LuxuryHotel.Models.ROOM
+@using System.Linq
+<link href="~/Content/Content/Styles.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "BookForm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@{
+    double costValue = (double)ViewBag.cost;
+}
+<style>
+    #Che {
+        width: 100%;
+        height: 100px;
+        background-color: dimgrey;
+    }
+
+    #form-content {
+        display: block;
+        min-height: 1000px;
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    #chitietphong {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #Information {
+        width: 100%;
+        display: block;
+        min-height: 180px;
+        border-bottom: 2px solid black;
+        margin-bottom: 20px;
+    }
+
+        #Information h1 {
+            font-weight: 700;
+        }
+
+    #btn-datphong {
+        width: 100%;
+        border-bottom: 2px solid black;
+        margin-bottom: 20px;
+        min-height: 150px;
+    }
+
+    #span-cost {
+        color: red;
+        font-weight: 700;
+    }
+
+    #inf-cus {
+        width: 100%;
+        border-bottom: 2px solid black;
+        margin-bottom: 20px;
+        min-height: 100px;
+    }
+</style>
+<div id="Che">
+
+</div>
+@{
+    LuxuryHotel.Models.CUSTOMER cus = (LuxuryHotel.Models.CUSTOMER)Session["User"];
+}
+<div id="form-content">
+    <div id="chitietphong">
+        <div id="Information">
+            <div class="col-lg-12">
+                <h3>Phòng: @Model.RoomName </h3>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+
+                    <span> Loại Phòng: @ViewBag.TypeName</span>
+                    <span> Khu vực: @ViewBag.Area</span>
+                    <div>
+                        Tiện ích:
+                        @foreach (var uti in ViewBag.Utulities)
+                        {
+                            <img src="/Admin/Images/Room/@uti.UtilitiesPicture" loading="lazy" style="width:20px; height:20px; margin:5px" />
+                        }
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                    <div>
+                        Giờ đầu:
+                        <span id="costfirsthour" value="@ViewBag.PriceFirstHour">@ViewBag.PriceFirstHour VND</span>
+                    </div>
+                    <div>
+                        Giờ sau:
+                        <span id="costperhour" value="@ViewBag.PricePerHour">@ViewBag.PricePerHour VND</span>
+                    </div>
+                    <div>
+                        Qua đêm:
+                        <span id="costovernight" value="@ViewBag.OverNightPrice">@ViewBag.PricePerHour VND</span>
+                    </div>
+                    <div>
+                        Theo Ngày:
+                        <span id="costperday" value="@ViewBag.PricePerDay">@ViewBag.PricePerHour VND</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="btn-datphong">
+        <h3>Thông tin đặt phòng</h3>
+        <div class="col-12">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+
+                <div>
+                    <label for="datetime">Thời gian nhận:</label>
+                    <span>
+                        @ViewBag.CheckInDate
+                    </span>
+
+                </div>
+                <div>
+                    <label for="datetime">Thời gian trả:</label>
+                    <span>@ViewBag.CheckOutDate</span>
+
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                <div id="total-time">
+                    Tổng giờ
+                    <span id="time"> </span>
+                </div>
+                <div id="span-cost">
+                    Giá:
+                    <span id="cost"> @ViewBag.cost </span> VND
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="inf-cus">
+        <h3>Thông tin khách hàng</h3>
+        <div id="infor-user" class="col-lg-12">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+                <span> Họ và tên: @cus.FullName</span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                <span>Gmail: @cus.Email</span>
+            </div>
+        </div>
+    </div>
+    <div id="type-paid">
+        <div id="infor-user" class="col-lg-12">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+                <a href="@Url.Action("Payment", "BookingRoom", new { cost = costValue })" class="btn btn-primary">Thanh toán qua Momo</a>            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+
+                <button class="btn btn-primary" id="btn-unpaid">Thanh toán tại khách sạn</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+       $('#btn-unpaid').click(function () {
+            var indate = ('@ViewBag.CheckInDate')
+            var outdate = ('@ViewBag.CheckOutDate');
+            var cost = parseInt('@ViewBag.cost');
+            var RoomID = parseInt('@Model.RoomID');
+            var CustomerID = parseInt('@cus.CustomerID');
+            // Generate the URL for the BookForm action with parameters
+            var url = '@Url.Action("SaveBooking", "BookingRoom")' +
+                      '?RoomID=' + RoomID +
+                      '&checkindate=' + encodeURIComponent(indate) +
+                      '&checkoutdate=' + encodeURIComponent(outdate) +
+                      '&cost=' + cost+
+                        '&CustomerID=' + CustomerID;
+
+    // Redirect to the generated URL
+           window.location.href = url;
+    alert('Đặt phòng thành công vui lòng kiểm tra thông tin qua email')
+});
+
+</script>

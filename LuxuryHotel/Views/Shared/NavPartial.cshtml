@@ -1,0 +1,82 @@
+﻿<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<nav>
+    <div class="header-area ">
+        <div id="sticky-header" class="main-header-area">
+            <div class="container-fluid p-0">
+                <div class="row align-items-center no-gutters">
+                    <div class="col-xl-5 col-lg-6">
+                        <div class="main-menu  d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a class="active" href="@Url.Action("Index", "LuxuryHotel")">home</a></li>
+                                    <li><a href="#offers_area">rooms</a></li>
+                                    <li><a href="#about">About</a></li>
+                                    <li>
+                                        <a href="#">blog <i class="ti-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="#">blog</a></li>
+                                            <li><a href="#">single-blog</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="logo-img">
+                            <a href="#">
+                                <img src="#" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                        <div class="book_room">
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            @if (Session["User"] != null)
+                                            {
+
+                                                <span style="font-weight: bold; color: white;" class="glyphicon glyphicon-user">@((Session["User"] as LuxuryHotel.Models.CUSTOMER)?.FullName)</span>
+                                            }
+                                            else
+                                            {
+                                                <span style="color: white; font-weight: bold; text-decoration: none;" class="glyphicon glyphicon-user"></span>
+                                            }
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <!-- Hiển thị nút "Thông tin cá nhân" nếu đã đăng nhập -->
+                                            @if (Session["User"] != null)
+                                            {
+                                                <li><a href="@Url.Action("ThongTinCN", "User")"><span class="glyphicon glyphicon-user"></span>Thông tin cá nhân</a></li>
+                                            }
+
+                                            <!-- Hiển thị nút "Đăng xuất" nếu đã đăng nhập -->
+                                            @if (Session["User"] != null)
+                                            {
+                                                <li><a href="@Url.Action("DangXuat", "User")"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+                                            }
+
+                                            <!-- Hiển thị nút "Đăng ký" và "Đăng nhập" nếu chưa đăng nhập -->
+                                            @if (Session["User"] == null)
+                                            {
+                                                <li><a style="color:midnightblue;font-weight:bold;" href="@Url.Action("DangKy", "User")"><span style="color:midnightblue;" class="glyphicon glyphicon-user"></span> Đăng ký</a></li>
+                                                <li><a style="color:midnightblue;font-weight:bold;" href="@Url.Action("DangNhap", "User")"><span style="color:midnightblue;" class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                                            }
+                                    
+
+                                </ul>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- header-end -->

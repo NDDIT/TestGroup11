@@ -1,0 +1,84 @@
+﻿
+
+
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+
+    #Chetren {
+        width: 100%;
+        height: 100px;
+        background-color: dimgrey;
+    }
+
+    #cheduoi {
+        margin-bottom: 500px;
+        font-size: 20px;
+        margin-left: 70px;
+        margin-top: 70px;
+        color: red;
+    }
+
+    #phanchinh {
+        margin-left: 50px;
+    }
+</style>
+
+<div id="Chetren"></div>
+<div class="container searchborder">
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="@Url.Action("Search", "LuxuryHotel")" method="get" class="navbar-form navbar-nav-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="strSearch" placeholder="Tìm kiếm">
+                </div>
+                <button type="submit" class="btn btn-default">Tìm</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+@{
+    if (Model != null)
+    {
+        <div id="phanchinh">
+            <h2>Tìm thấy @ViewBag.Kq kết quả</h2>
+
+            <div class="row text-center">
+                @foreach (var image in Model)
+                {
+                    <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+                        <a href="@Url.Action("ChiTietPhong", "LuxuryHotel", new { id = image.RoomID })">
+                            <div class="thumbnail">
+                                @Html.Action("Sliderroom", "LuxuryHotel", new { id = image.RoomID })
+
+                                <div class="caption">
+                                    <h3>
+                                        @image.RoomName
+                                    </h3>
+
+                                    <span> Khu vực: @image.Area</span>
+                                    <span> Giá:</span>
+                                    <p>
+
+                                    </p>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+
+    }
+    else
+    {
+        <h2 id="cheduoi">không tìm thấy kết quả</h2>
+    }
+}

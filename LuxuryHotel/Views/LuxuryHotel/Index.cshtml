@@ -1,0 +1,253 @@
+﻿@using LuxuryHotel.Models
+
+<link href="~/Content/Styles.css" rel="stylesheet" />
+@using PagedList.Mvc;
+@model PagedList.PagedList<ROOM>
+
+
+@{
+    ViewBag.Title = "TRANG CHỦ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    #timkiem {
+        margin-top: 50px;
+        margin-left: 100px;
+    }
+
+    .searchborder {
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top:20px;
+        padding-top:10px;
+        width: 25%;
+        padding-bottom:15px;
+    }
+    #search-btn{
+        border-radius:10%;
+    }
+    #room-price{
+        display:block;
+        justify-content:left;
+
+    }
+</style>
+
+@section slider
+{
+    @Html.Action("SliderPartial", "LuxuryHotel")
+}
+<div class="slider_text text-center">
+    <h3>LUXURY HOTEL</h3>
+    <p>ENJOY THE GREAT MOMENTS</p>
+</div>
+<div class="container searchborder">
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="@Url.Action("Search", "LuxuryHotel")" method="get" class="navbar-form navbar-nav-right" role="search">
+                <div class="col-lg-10 align-self-center">
+                    <fieldset>
+                        <input type="text" class="searchText" autocomplete="on" name="strSearch" placeholder="Tìm kiếm">
+                    </fieldset>
+                </div>
+                <div class="col-lg-2 align-self-center">
+                    <button type="submit" class="btn btn-default">Tìm</button>
+                </div>
+                
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        // Khi trang được tải
+        loadAreaOptions(); // Gọi phương thức để tải danh sách khu vực vào thẻ select
+
+    });
+    function loadAreaOptions() {
+        $.ajax({
+            url: '/Reception/Room/GetAreaList',
+            type: 'GET',
+            success: function (data) {
+                console.log(data);
+                if (data.code === 200) {
+                    // Xóa tất cả các option trước khi thêm mới
+                    $('#areaSelect').empty();
+                    $('#areaSelect').append($('<option>', {
+                        value: "",
+                        text: "Chọn khu vực"
+                    }));
+                    // Thêm các phần tử option vào thẻ select dựa trên danh sách khu vực
+                    $.each(data.areas, function (i, item) {
+                        $('#areaSelect').append($('<option>', {
+                            value: item,
+                            text: item
+                        }));
+                    });
+                } else {
+                    console.log("Lỗi khi lấy danh sách khu vực: " + data.msg);
+                }
+            },
+            error: function (error) {
+                console.log("Lỗi khi lấy danh sách khu vực: " + error);
+            }
+        });
+    }
+   
+</script>
+<!-- about_area_end -->
+<!-- offers_area_start -->
+<div class="offers_area" id="offers_area">
+    <div class="container">
+        <h2 class="text-center">Phòng</h2>
+        <hr>
+        <div class="row text-center">
+            @foreach (var image in Model)
+            {
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+                    <a href="@Url.Action("ChiTietPhong", "LuxuryHotel", new { id = image.RoomID })">
+                        <div class="thumbnail">
+                            @Html.Action("Sliderroom", "LuxuryHotel", new { id = image.RoomID })
+
+                            <div class="caption">
+                                <h3>
+                                    @image.RoomName
+                                </h3>
+                                <div id="room-price">
+                                    <div>
+                                        <span> Khu vực: @image.Area</span>
+                                    </div>
+                                    @foreach (var type in ViewBag.RoomType)
+                                    {
+                                        if (type.RoomTypeID == image.RoomTypeID)
+                                        {
+
+                                            <div>
+                                                <span> Giờ đầu:  @type.PriceFirstHour</span>
+                                            </div>
+                                            <div>
+                                                <span> Giờ sau:  @type.PricePerHour</span>
+                                            </div>
+                                            <div>
+                                                <span> Qua đêm:  @type.OverNightPrice</span>
+                                            </div>
+                                            <div>
+                                                <span> Theo Ngày:  @type.PriceByDay</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+
+
+
+            }
+        </div>
+        <nav class="text-center">
+            @* Tao lien ket trang*@
+            Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount;
+            <div class="MenuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+            </div>
+            <style>
+                .MenuTrang li {
+                    display: inline;
+                }
+            </style>
+
+        </nav>
+        }
+    </div>
+</div>
+<!-- offers_area_end -->
+<!-- about_area_start -->
+<div class="about_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7">
+                <div class="about_thumb2 d-flex">
+                    <div class="img_1">
+                        <img src="~/Content/images/about/1.png" alt="" />
+                    </div>
+                    <div class="img_2">
+                        <img src="~/Content/images/about/2.png" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-lg-5">
+                <div class="about_info">
+                    <div class="section_title mb-20px">
+                        <span>Delicious Food</span>
+                        <h3>
+                            We Serve Fresh and <br>
+                            Delicious Food
+                        </h3>
+                    </div>
+                    <p>
+                        Suscipit libero pretium nullam potenti. Interdum, blandit phasellus consectetuer dolor ornare
+                        dapibus enim ut tincidunt rhoncus tellus sollicitudin pede nam maecenas, dolor sem. Neque
+                        sollicitudin enim. Dapibus lorem feugiat facilisi faucibus et. Rhoncus.
+                    </p>
+                    <a href="#" class="line-button">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- about_area_end -->
+<!-- forQuery_start -->
+<div class="forQuery" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1 col-md-12">
+                <div class="Query_border">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-xl-6 col-md-6">
+                            <div class="Query_text">
+                                <p>For Reservation 0r Query?</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6">
+                            <div class="phone_num">
+                                <a href="#" class="mobile_no">+84 775 478 600</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- forQuery_end-->
+<!-- instragram_area_start -->
+<div class="instragram_area">
+    <div class="single_instagram">
+        <img src="~/Content/images/ins/1.png" alt="" />
+    
+    </div>
+    <div class="single_instagram">
+        <img src="~/Content/images/ins/2.png" alt="" />
+      
+    </div>
+    <div class="single_instagram">
+        <img src="~/Content/images/ins/3.png" alt="" />
+        
+    </div>
+    <div class="single_instagram">
+        <img src="~/Content/images/ins/4.png" alt="" />
+      
+    </div>
+    <div class="single_instagram">
+        <img src="~/Content/images/ins/5.png" alt="" />
+        
+    </div>
+</div>
+<!-- instragram_area_end -->
